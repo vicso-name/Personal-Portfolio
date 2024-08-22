@@ -5620,3 +5620,6 @@ button.swiper-pagination-bullet {
   backface-visibility: hidden;
   overflow: hidden;
 }
+.main-test {
+  opacity: 0;
+}
