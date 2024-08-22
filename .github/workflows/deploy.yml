@@ -24,4 +24,4 @@ jobs:
 
     - name: Sync files to server
       run: |
-        rsync -e "ssh -p 20022 -i ~/.ssh/vicsothemes_rsa -o StrictHostKeyChecking=no" --archive --compress --delete Personal-Portfolio/ v127576@hostch01.fornex.org:/home/v127576/public_html/vicsothemes.com/wp-content/themes/butterfly/
+            rsync -e "ssh -p 20022 -i ~/.ssh/vicsothemes_rsa -o StrictHostKeyChecking=no" --archive --compress --delete ./ v127576@hostch01.fornex.org:/home/v127576/public_html/vicsothemes.com/wp-content/themes/butterfly/
