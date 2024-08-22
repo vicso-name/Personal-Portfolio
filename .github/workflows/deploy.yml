@@ -1,0 +1,27 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup SSH key
+      run: |
+        mkdir -p ~/.ssh
+        echo "$SSH_PRIVATE_KEY" > ~/.ssh/vicsothemes_rsa
+        chmod 600 ~/.ssh/vicsothemes_rsa
+        ssh-keyscan -p 20022 hostch01.fornex.org >> ~/.ssh/known_hosts
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    - name: Sync files to server
+      run: |
+        rsync -e "ssh -p 20022 -i ~/.ssh/vicsothemes_rsa -o StrictHostKeyChecking=no" --archive --compress --delete Personal-Portfolio/ v127576@hostch01.fornex.org:/home/v127576/public_html/vicsothemes.com/wp-content/themes/butterfly/
